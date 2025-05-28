@@ -4,7 +4,11 @@
 
 import pygame
 
+from asteroidfield import *
+
 from player import *
+
+from asteroid import *
 
 from constants import * #(SCREEN_WIDTH, importing with wild car for now
                        #SCREEN_HEIGHT, 
@@ -13,13 +17,20 @@ from constants import * #(SCREEN_WIDTH, importing with wild car for now
                        #ASTEROID_SPAWN_RATE,
                        #ASTEROID_MAX_RADIUS)
 
-updatable = pygame.sprite.Group()
-drawable = pygame.sprite.Group()
-Player.containers = (updatable, drawable)
+#updatable = pygame.sprite.Group()
+#drawable = pygame.sprite.Group()
+#Player.containers = (updatable, drawable)
 
 def main():
     pygame.init()
+    asteroid_group = pygame.sprite.Group()
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroid_group, updatable, drawable)
+    AsteroidField.containers = (updatable,)
     player = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
+    asteroids_field = AsteroidField() 
     clock = pygame.time.Clock()
     dt = 0
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
