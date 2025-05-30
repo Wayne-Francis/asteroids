@@ -20,3 +20,9 @@ class CircleShape(pygame.sprite.Sprite):
     def update(self, dt):
         # sub-classes must override
         pass
+
+    def collison(self, Asteroid):
+        if self.position.distance_to(Asteroid.position) <= self.radius + Asteroid.radius:
+            return True
+        else:
+            return False
